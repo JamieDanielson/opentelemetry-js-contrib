@@ -73,7 +73,11 @@ export class ExpressInstrumentation extends InstrumentationBase<
       new InstrumentationNodeModuleDefinition<typeof express>(
         'express',
         ['^4.0.0'],
-        (moduleExports, moduleVersion) => {
+        (module: any, moduleVersion) => {
+          const moduleExports =
+            module[Symbol.toStringTag] == 'Module'
+              ? module.default // ESM
+              : module; // CJS
           diag.debug(`Applying patch for express@${moduleVersion}`);
           const routerProto = moduleExports.Router as unknown as express.Router;
           // patch express.Router.route
@@ -97,10 +101,14 @@ export class ExpressInstrumentation extends InstrumentationBase<
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             this._getAppUsePatch() as any
           );
-          return moduleExports;
+          return module;
         },
-        (moduleExports, moduleVersion) => {
-          if (moduleExports === undefined) return;
+        (module: any, moduleVersion) => {
+          if (module === undefined) return;
+          const moduleExports =
+            module[Symbol.toStringTag] == 'Module'
+              ? module.default // ESM
+              : module; // CJS
           diag.debug(`Removing patch for express@${moduleVersion}`);
           const routerProto = moduleExports.Router as unknown as express.Router;
           this._unwrap(routerProto, 'route');
