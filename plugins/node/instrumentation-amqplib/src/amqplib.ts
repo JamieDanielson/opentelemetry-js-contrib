@@ -420,8 +420,6 @@ export class AmqplibInstrumentation extends InstrumentationBase {
         let span: Span;
         if (self._config.useLinksForConsume) {
           const parentSpanContext = trace.getSpan(parentContext)?.spanContext();
-          console.log('parentContext', parentContext);
-          console.log('parentSpanContext', parentSpanContext);
           let links: Link[] | undefined;
           if (parentSpanContext) {
             links = [
@@ -429,7 +427,6 @@ export class AmqplibInstrumentation extends InstrumentationBase {
                 context: parentSpanContext,
               },
             ];
-            console.log('links', links);
           }
           span = self.tracer.startSpan(`${queue} process`, {
             kind: SpanKind.CONSUMER,
