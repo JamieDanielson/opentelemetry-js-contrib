@@ -1362,8 +1362,12 @@ describe('amqplib instrumentation promise model', () => {
 
       // link back to publish span
       expect(consumeSpan.links.length).toBe(1);
-      expect(consumeSpan.links[0].context.traceId).toEqual(publishSpan.spanContext().traceId);
-      expect(consumeSpan.links[0].context.spanId).toEqual(publishSpan.spanContext().spanId);
+      expect(consumeSpan.links[0].context.traceId).toEqual(
+        publishSpan.spanContext().traceId
+      );
+      expect(consumeSpan.links[0].context.spanId).toEqual(
+        publishSpan.spanContext().spanId
+      );
 
       expectConsumeEndSpyStatus([EndOperation.AutoAck]);
     });
@@ -1441,8 +1445,12 @@ describe('amqplib instrumentation promise model', () => {
 
         // link back to publish span
         expect(consumeSpan.links.length).toBe(1);
-        expect(consumeSpan.links[0].context.traceId).toEqual(publishSpan.spanContext().traceId);
-        expect(consumeSpan.links[0].context.spanId).toEqual(publishSpan.spanContext().spanId);
+        expect(consumeSpan.links[0].context.traceId).toEqual(
+          publishSpan.spanContext().traceId
+        );
+        expect(consumeSpan.links[0].context.spanId).toEqual(
+          publishSpan.spanContext().spanId
+        );
       });
     });
   });
@@ -1456,7 +1464,6 @@ describe('amqplib instrumentation promise model', () => {
       instrumentation.setConfig({
         consumeEndHook: endHookSpy,
         useLinksForConsume: true,
-        
       });
 
       confirmChannel = await conn.createConfirmChannel();
@@ -1561,8 +1568,12 @@ describe('amqplib instrumentation promise model', () => {
 
       // link back to publish span
       expect(consumeSpan.links.length).toBe(1);
-      expect(consumeSpan.links[0].context.traceId).toEqual(publishSpan.spanContext().traceId);
-      expect(consumeSpan.links[0].context.spanId).toEqual(publishSpan.spanContext().spanId);
+      expect(consumeSpan.links[0].context.traceId).toEqual(
+        publishSpan.spanContext().traceId
+      );
+      expect(consumeSpan.links[0].context.spanId).toEqual(
+        publishSpan.spanContext().spanId
+      );
 
       expectConsumeEndSpyStatus([EndOperation.AutoAck]);
     });
@@ -1647,10 +1658,13 @@ describe('amqplib instrumentation promise model', () => {
 
         // link back to publish span
         expect(consumeSpan.links.length).toBe(1);
-        expect(consumeSpan.links[0].context.traceId).toEqual(publishSpan.spanContext().traceId);
-        expect(consumeSpan.links[0].context.spanId).toEqual(publishSpan.spanContext().spanId);
+        expect(consumeSpan.links[0].context.traceId).toEqual(
+          publishSpan.spanContext().traceId
+        );
+        expect(consumeSpan.links[0].context.spanId).toEqual(
+          publishSpan.spanContext().spanId
+        );
       });
     });
-
   });
 });
