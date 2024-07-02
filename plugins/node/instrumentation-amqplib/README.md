@@ -71,6 +71,12 @@ If timeout is not big enough, span might be closed with 'InstrumentationTimeout'
 
 Default is 1 minute
 
+### Links for Consume
+
+By default, consume spans continue the trace where a message was produced. However, per the [spec](https://opentelemetry.io/docs/specs/semconv/messaging/messaging-spans/#consumer-spans), consume spans should be linked to the message's creation context. Setting to true, this will enable the behavior to follow the spec.
+
+Default is false
+
 ## Semantic Conventions
 
 This package uses `@opentelemetry/semantic-conventions` version `1.22+`, which implements Semantic Convention [Version 1.7.0](https://github.com/open-telemetry/opentelemetry-specification/blob/v1.7.0/semantic_conventions/README.md)
