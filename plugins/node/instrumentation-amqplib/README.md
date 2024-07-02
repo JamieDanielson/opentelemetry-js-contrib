@@ -77,6 +77,16 @@ By default, consume spans continue the trace where a message was produced. Howev
 
 Default is false
 
+## Running Tests Locally
+
+To run the tests locally, you need to have a RabbitMQ server running.  You can use the following command to start a RabbitMQ server using Docker:
+
+```bash
+npm run test:docker:run
+```
+
+By default, the tests that connect to RabbitMQ are skipped. To make sure these tests are run, you can set the `RUN_RABBIT_TESTS` environment variable to `true`
+
 ## Semantic Conventions
 
 This package uses `@opentelemetry/semantic-conventions` version `1.22+`, which implements Semantic Convention [Version 1.7.0](https://github.com/open-telemetry/opentelemetry-specification/blob/v1.7.0/semantic_conventions/README.md)
@@ -97,16 +107,6 @@ Attributes collected:
 | `messaging.url`                  | The connection string.                                                 |
 | `net.peer.name`                  | Remote hostname or similar.                                            |
 | `net.peer.port`                  | Remote port number.                                                    |
-
-## Running Tests Locally
-
-To run the tests locally, you need to have a RabbitMQ server running.  You can use the following command to start a RabbitMQ server using Docker:
-
-```bash
-npm run test:docker:run
-```
-
-By default, the tests that connect to RabbitMQ are skipped. To make sure these tests are run, you can set the `RUN_RABBIT_TESTS` environment variable to `true`
 
 ## Useful links
 
